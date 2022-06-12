@@ -7,8 +7,9 @@
     <version>1.0</version>
 
     <modules>
-        <module>GB-cloud-ui</module>
+        <module>GB-cloud-etc</module>
         <module>GB-cloud-server</module>
+        <module>GB-cloud-ui</module>
     </modules>
 
     <properties>
@@ -21,17 +22,22 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17.0.1</version>
+            <version>18.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17.0.1</version>
+            <version>18.0.1</version>
         </dependency>
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
-            <version>4.1.76.Final</version>
+            <version>4.1.77.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.36.0.3</version>
         </dependency>
     </dependencies>
 
@@ -62,7 +68,7 @@
                             <options>
                                 <option>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</option>
                             </options>
-                            <mainClass>org.kolobkevic.GB_cloud.ui.App</mainClass>
+                            <mainClass>App</mainClass>
                         </configuration>
                     </execution>
                 </executions>

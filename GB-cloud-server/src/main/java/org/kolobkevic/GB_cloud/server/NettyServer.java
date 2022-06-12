@@ -11,14 +11,19 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
-import org.kolobkevic.GB_cloud.ui.netty.common.BasicHandler;
+import org.kolobkevic.GB_cloud.ui.common.BasicHandler;
+import org.kolobkevic.GB_cloud.ui.common.SQLHandler;
 
 public class NettyServer {
 
-    private static final int MB_50 = 50 * 1_000_000;
+    private static final int MB_50 = 50 * 1024 * 1024;
     private static final int PORT = 55005;
 
     public static void main(String[] args) throws InterruptedException {
+        if (!SQLHandler.connect()){
+            System.out.println("Не удалось подключиться к БД");
+            throw new RuntimeException("Не удалось подключиться к БД");
+        }
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -41,6 +46,7 @@ public class NettyServer {
         } finally {
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
+            SQLHandler.disconnect();
         }
     }
 
